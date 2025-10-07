@@ -45,7 +45,9 @@ const db=new pg.Client({
     password: process.env.password,
     port: process.env.port,
 });
-db.connect();
+db.connect()
+    .then(() => console.log('Connected to the Render database'))
+    .catch((err) => console.error('Database connection error:', err));
 
 
 async function topic_list(req){
