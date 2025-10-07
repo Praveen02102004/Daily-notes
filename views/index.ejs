@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+            'sm': '567px',
+            // => @media (min-width: 640px) { ... }
+
+            'md': '768px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1024px',
+            // => @media (min-width: 1024px) { ... }
+
+            'xl': '1280px',
+            // => @media (min-width: 1280px) { ... }
+
+            '2xl': '1536px',
+            // => @media (min-width: 1536px) { ... }
+          },
+        extend: {
+
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+    <!-- Google Fonts: Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+      .font-great-vibes {
+        font-family: 'Great Vibes', cursive;
+      }
+    </style>
+</head>
+<body class="bg-[#ffde59]">
+
+  <!-- LoGO -->
+  <section class="max-w-[100%] bg-[#ffde59] min-h-[100vh]  mx-auto">
+    <div class="max-w-[100%] mx-auto">
+
+  <div class="relative  bg-[length:100%_100vh] bg-no-repeat" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0) 90%, #dad8cee9 100%), url('mynote1.png');">
+        <div class="font-great-vibes text-8xl  absolute left-[13%] sm:top-[15%]  top-[5%]">Daily note</div>
+        <div class="relative z-10 flex flex-col items-center justify-center min-h-[100vh]">
+          <span class=" text-2xl text-black  sm:mt-[-10px] sm:max-w-[40%] mt-[-5px] max-w-[50%] font-serif">Take control of your ideas with NotesApp. Create, organize, and manage your notes by subjects — all in one secure place, anytime you need them.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+<!-- backgrounf 2 -->
+
+  <section class="max-w-[100%] bg-[#ffde59] min-h-[100vh]  mx-auto">
+    <div class="max-w-[100%] mx-auto">
+
+  <div class="relative  bg-[length:100%_100vh] bg-no-repeat" style="background-image: linear-gradient(to top, rgba(255,255,255,0) 90%, #d7d5ccbb 100%), url('mynote2.webp');">
+      <div class="text-6xl font-great-vibes font-medium md:ml-[20%] mx-[12%] absolute md:top-[-20px] top-[-80px] tracking-wide">Your Personal Notebook in the Digital World.</div>
+        <div class="relative sm:ml-[35%] z-10 flex flex-col items-center ml-[20%] justify-center min-h-[100vh]">
+          <span class=" text-4xl text-black  sm:mt-[-10px] sm:min-w-[100%] mt-[-5px] sm:max-w-[100%] font-serif sm:mx-[35%] mx-[20%]">Don’t let ideas slip away — capture them here.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+   
+
+   <!-- Section 3 -->
+    <section class="max-w-[100%] max-h-[75vh]">
+      <form action="/create" method="GET" class="mx-[20%] md:mx-[25%] my-[10%] bg-[url('mynote.png')] bg-cover min-h-[45vh]">
+        <div class="grid grid-rows-2 items-center justify-center ">
+          <div class="my-[15px] mx-[20px] font-serif text-[25px] font-semibold text-center mt-[50px]">Your digital notebook,<br> designed to keep you productive.
+          </div>
+          <button type="submit" class="text-2xl font-serif mx-[10%]  font-semibold bg-[orange] min-h-[50px] rounded-full">Create now</button>
+        </div>
+      </form>
+
+    </section>
+
+
+</body>
+</html>

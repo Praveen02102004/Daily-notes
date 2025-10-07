@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+            'sm': '567px',
+            // => @media (min-width: 640px) { ... }
+
+            'md': '768px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1024px',
+            // => @media (min-width: 1024px) { ... }
+
+            'xl': '1280px',
+            // => @media (min-width: 1280px) { ... }
+
+            '2xl': '1536px',
+            // => @media (min-width: 1536px) { ... }
+          },
+        extend: {
+
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+    <!-- Google Fonts: Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+      .font-great-vibes {
+        font-family: 'Great Vibes', cursive;
+      }
+    </style>
+</head>
+<body class="bg-[#ffde59]">
+
+  <section class="min-w-[100%] max-h-[30vh] bg-[#ffde59]">
+    <div class=" font-great-vibes text-8xl ml-[10%] ">
+      <h1 class="pt-[5%]">Daily Note</h1>
+
+    </div>
+
+  </section>
+
+
+    <div class="bg-[#ffde59]">
+                <div class="border-solid border-4 border-black mx-[5%] sm:mx-[20%]  min-h-[65vh] flex flex-col pb-[15px]   items-center">
+                    <h1 class=" rounded-full text-2xl font-serif px-[30px]  py-[10px] my-[20px] bg-[orange]">Registration Page</h1>
+                    
+                    <form action="/register" method="POST" class="flex flex-col font-serif mt-[20px] gap-y-10 ">
+
+                      <div>
+                        <label for="email" class="text-2xl">Email</label><br>
+                        <input type="email" name="username" placeholder="Enter email" class="mt-[10px] py-[10px] min-w-[100%] px-[5px]">
+                      </div>
+
+                      <div>
+                        <label for="password" class="text-2xl">Password</label><br>
+                        <input type="password" name="password" placeholder="Enter password" class="mt-[10px] py-[10px] min-w-[100%] px-[5px]">
+                      </div>
+
+                      <div class="flex gap-x-[15%] text-2xl">
+                      <button type="button" class="bg-[orange] px-[30px] py-[10px] rounded-full" onclick="window.location.href='/login'">Back to Login</button>
+                      <button type="submit" class="bg-[orange] px-[20px] py-[10px] rounded-full">Register</button>
+                      
+                      </div>
+                    </form>
+
+                </div>
+
+             </div>
+    
+</body>
+</html>

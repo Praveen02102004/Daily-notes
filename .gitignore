@@ -1,0 +1,32 @@
+# === Node.js Specific ===
+node_modules/
+.env
+
+# === Logs ===
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === OS-Specific ===
+.DS_Store
+Thumbs.db
+
+# === Build Files ===
+dist/
+build/
+
+# === IDE-Specific ===
+.vscode/
+.idea/
+
+# === Test Artifacts ===
+*.tap
+*.xml
+coverage/
+build/
+
+# === Temporary Files ===
+*.swp
+*~

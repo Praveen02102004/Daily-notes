@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+            'sm': '567px',
+            // => @media (min-width: 640px) { ... }
+
+            'md': '768px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1024px',
+            // => @media (min-width: 1024px) { ... }
+
+            'xl': '1280px',
+            // => @media (min-width: 1280px) { ... }
+
+            '2xl': '1536px',
+            // => @media (min-width: 1536px) { ... }
+          },
+        extend: {
+
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+    <!-- Google Fonts: Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+      .font-great-vibes {
+        font-family: 'Great Vibes', cursive;
+      }
+    </style>
+</head>
+<body class="bg-[#ffde59] min-h-[100vh] min-h-[100%]">
+
+
+    <section class="relative min-h-[140px]">
+        <div class="text-6xl absolute left-[20%] mt-[80px] font-great-vibes">
+            <h1>Your Notes</h1>
+        </div>
+    </section><br>
+
+
+    <!-- list of topics -->
+
+    <section class="flex flex-col">
+      <ul>
+
+        <% topics.forEach(function(topic)  { %>
+        <div class="max-w-[65%] mx-auto max-h-[10vh]">
+            <div class="bg-[url('mynote7.webp')] flex mt-[30px] justify-between items-center bg-cover py-[25px] px-[20px] relative">
+                <form action="/content" method="POST" style="display: inline; margin: 0 auto;">
+                  <button type="submit" name="tid" value="<%= topic.topic_id %>" class="font-serif text-2xl hover:underline text-center">
+                    <%= topic.topic %>
+                  </button>
+                </form>
+
+                <form action="/delete-topic" method="POST" style="display: inline;">
+                  <button type="submit" name="tid" value="<%= topic.topic_id %>" class="text-[20px]  text-[white] w-[50px] rounded-full bg-[orange] min-h-[50px] absolute right-[10%] bottom-[15px]">X</button>
+                </form>
+            </div>
+        </div>
+        <% }) %>
+
+
+        <!-- ADD NEW ITEMS -->
+         <form action="/add" method="POST">
+         <div class="max-w-[65%] mx-auto   max-h-[10vh] mb-[50px]">
+            <div class="bg-[url('mynote7.webp')] flex relative mt-[30px] justify-center  bg-cover py-[25px] ">
+                <input style="border-color: transparent;" class="bg-[transparent] outline-none border-b-2 focus:border-orange-500 placeholder:text-center placeholder:text-2xl placeholder:font-serif text-center font-serif text-2xl"
+                 type="text" name="newItem" placeholder="New Items" autofocus="true">
+                <button type="submit" name="list" class="w-[50px] rounded-full bg-[orange] text-[30px] min-h-[50px] absolute right-[10%] top-[18px] text-white" >+</button>
+              </div>
+        </div>
+      </form>
+
+
+
+      <!-- logout button -->
+
+      <form action="/logout" method="get" class="max-w-[100%] text-center mx-auto">
+        <div class="text-2xl max-w-[100%] items-center flex justify-center">
+          <button class=" bg-[orange] px-[30px] py-[10px] rounded-full">Logout</button>
+        </div>
+      </form>
+        
+
+      </ul>
+    </section>
+    
+</body>
+</html>

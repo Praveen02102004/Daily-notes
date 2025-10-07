@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily notes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+    tailwind.config = {
+      theme: {
+        screens: {
+            'sm': '567px',
+            // => @media (min-width: 640px) { ... }
+
+            'md': '768px',
+            // => @media (min-width: 768px) { ... }
+
+            'lg': '1024px',
+            // => @media (min-width: 1024px) { ... }
+
+            'xl': '1280px',
+            // => @media (min-width: 1280px) { ... }
+
+            '2xl': '1536px',
+            // => @media (min-width: 1536px) { ... }
+          },
+        extend: {
+
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
+    }
+  </script>
+    <!-- Google Fonts: Great Vibes -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+      .font-great-vibes {
+        font-family: 'Great Vibes', cursive;
+      }
+
+      textarea::-webkit-scrollbar {
+        width: 8px; /* Adjust scrollbar width */
+      }
+
+      textarea::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Make the scrollbar thumb transparent */
+      }
+
+      textarea::-webkit-scrollbar-track {
+        background-color: transparent; /* Make the scrollbar track transparent */
+      }
+
+      textarea {
+        resize: none; /* Disable manual resizing */
+        overflow-y: auto; /* Enable vertical scrolling */
+      }
+
+        
+    </style>
+</head>
+<body class="bg-[#ffde59] min-w-[100%] ">
+    
+    <!-- Title -->
+
+    <section>
+        <div class="text-4xl flex justify-center items-center font-serif py-[15px]">
+            <h1><%= title %></h1>
+        </div>
+    </section>
+
+
+    <!-- Content -->
+
+    <section>
+      <form action="update" method="post">
+        <div class="bg-[url('mynote.png')] bg-cover min-h-[80vh] mx-[8%]">
+
+            <textarea  class="outline-none sm:min-w-[97%] lg:min-w-[98%] min-w-[94%] min-h-[77vh] ml-[15px]   my-[10px] bg-[transparent]" name="content"><%= content %></textarea>
+
+        </div>
+        <div class="w-[100%] flex justify-center items-center gap-[5px]">
+        <button class="flex justify-center items-center  my-[15px] bg-[orange] max-w-[80px] px-[4%] py-[0.6%] rounded-full">Save</button>
+        <button type="button" onclick="window.location.href='/topic'" class="flex justify-center items-center  my-[15px] bg-[orange] max-w-[80px] px-[4%] py-[0.6%] rounded-full">Back</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- button -->
+
+
+</body>
+</html>
