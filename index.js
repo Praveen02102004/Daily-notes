@@ -1,5 +1,5 @@
 import express from "express";
-import bodyParser from "body-parser";
+
 import path from "path";
 import  pg from "pg";
 import session from 'express-session';
@@ -14,7 +14,7 @@ const port = 3000;
 env.config();
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(process.cwd()));
+
 app.use(
   session({
     secret: process.env.secret, 
@@ -29,14 +29,12 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static("public"));
 
 app.set("views", path.join(process.cwd(), "views"));
 app.set("view engine", "ejs");
 
-
-app.use(express.static(path.join(process.cwd(), "public")));
 
 
 const db = new pg.Pool({
@@ -91,31 +89,44 @@ app.get("/logout", (req, res) => {
     });
   });
 });
-
 app.get("/content", async (req, res) => {
     try {
         const userId = req.session.uid;
-        const tid = req.session.tid;
+
+        // 🔥 FIX: support both session + query
+        const tid = req.session.tid || req.query.tid;
 
         if (!userId || !tid) {
             return res.redirect("/login");
         }
-        
-        const title=await db.query("SELECT topic FROM topics WHERE user_id = $1 AND topic_id = $2",
-            [userId, tid]);
 
+        // 🔥 ensure session is updated
         req.session.tid = tid;
 
-        const note = await db.query(
+        const titleResult = await db.query(
+            "SELECT topic FROM topics WHERE user_id = $1 AND topic_id = $2",
+            [userId, tid]
+        );
+
+        if (titleResult.rows.length === 0) {
+            return res.send("Topic not found");
+        }
+
+        const noteResult = await db.query(
             "SELECT note FROM notes WHERE user_id = $1 AND topic_id = $2",
             [userId, tid]
         );
 
-        const content = note.rows.length > 0 ? note.rows[0].note : "Write something";
+        const content =
+            noteResult.rows.length > 0
+                ? noteResult.rows[0].note
+                : "Write something";
 
-        res.render("content", { 
-            title: title.rows[0].topic,
-            content: content });
+        res.render("content", {
+            title: titleResult.rows[0].topic,
+            content: content,
+        });
+
     } catch (err) {
         console.log(err);
         res.status(500).send("Internal Server Error");
@@ -128,7 +139,7 @@ app.get("/topic",async(req,res)=>{
     }
     catch(err){
         console.log(err);
-        res.status(500).send("Internal Server Error");
+       res.redirect("/login");
     }
     
 });
@@ -217,13 +228,17 @@ app.post('/content', async (req, res) => {
     const topicId = req.body.tid;
     const userId = req.session.uid;
 
+    if (!userId) {
+        return res.redirect("/login");
+    }
+
+    if (!topicId) {
+        return res.send("Invalid topic ID"); // prevent crash
+    }
+
+    req.session.tid = topicId;
+
     try {
-        if (!userId) {
-            return res.redirect("/login");
-        }
-
-        req.session.tid = topicId;
-
         const check = await db.query(
             "SELECT * FROM notes WHERE user_id = $1 AND topic_id = $2",
             [userId, topicId]
@@ -231,11 +246,13 @@ app.post('/content', async (req, res) => {
 
         if (check.rows.length === 0) {
             await db.query(
-                "INSERT INTO notes (user_id, topic_id) VALUES ($1, $2)",
-                [userId, topicId]
+                "INSERT INTO notes (user_id, topic_id, note) VALUES ($1, $2, $3)",
+                [userId, topicId, ""]
             );
         }
+
         res.redirect("/content");
+
     } catch (err) {
         console.log(err);
         res.status(500).send("Internal Server Error");
