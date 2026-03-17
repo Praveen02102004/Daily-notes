@@ -38,24 +38,20 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(process.cwd(), "public")));
 
-const db=new pg.Client({
-    user: process.env.user,
-    host: process.env.host,
-    database: process.env.database,
-    password: process.env.password,
-    port: process.env.port,
-});
-db.connect()
-    .then(() => console.log('Connected to the Render database'))
-    .catch((err) => console.error('Database connection error:', err));
 
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 
 async function topic_list(req){
     try{
     const userId=req.session.uid;
-    if(!userId){
-        return res.redirect("/login")
-    }
+    if (!userId) {
+    throw new Error("User not logged in");
+}
     const list=await db.query('select * from topics where user_id=$1',[userId]);
     const allrows=list.rows;
     return allrows;
